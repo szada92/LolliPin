@@ -9,12 +9,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.orangegangsters.lollipin.CustomPinActivity;
-import com.github.orangegangsters.lollipin.MainActivity;
+import com.github.orangegangsters.lollipin.CustomRxPinActivity;
+import com.github.orangegangsters.lollipin.MainActivityRx;
 import com.github.orangegangsters.lollipin.NotLockedActivity;
 import com.github.orangegangsters.lollipin.lib.encryption.Encryptor;
 import com.github.orangegangsters.lollipin.lib.enums.Algorithm;
-import com.github.orangegangsters.lollipin.lib.managers.AppLock;
 import com.github.orangegangsters.lollipin.lib.managers.AppLockImpl;
 import com.github.orangegangsters.lollipin.lib.managers.FingerprintUiHelper;
 import com.github.orangegangsters.lollipin.lib.managers.LockManager;
@@ -88,8 +87,8 @@ public class PinLockTest extends AbstractTest {
         clickOnView(R.id.pin_code_button_3);
         clickOnView(R.id.pin_code_button_4);
         clickOnView(R.id.pin_code_button_5);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
         solo.sleep(1000);
 
         //--------Same pin--------
@@ -101,15 +100,15 @@ public class PinLockTest extends AbstractTest {
 
         //Go to unlock
         clickOnView(R.id.button_unlock_pin);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         //Test fingerprint if available
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             ImageView fingerprintImageView = (ImageView) solo.getView(com.github.orangegangsters.lollipin.lib.R.id.pin_code_fingerprint_imageview);
             TextView fingerprintTextView = (TextView) solo.getView(com.github.orangegangsters.lollipin.lib.R.id.pin_code_fingerprint_textview);
             FingerprintManager fingerprintManager = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
-            FingerprintUiHelper fingerprintUiHelper = new FingerprintUiHelper.FingerprintUiHelperBuilder(fingerprintManager).build(fingerprintImageView, fingerprintTextView, (CustomPinActivity) solo.getCurrentActivity());
+            FingerprintUiHelper fingerprintUiHelper = new FingerprintUiHelper.FingerprintUiHelperBuilder(fingerprintManager).build(fingerprintImageView, fingerprintTextView, (CustomRxPinActivity) solo.getCurrentActivity());
             if (fingerprintManager.isHardwareDetected() && fingerprintUiHelper.isFingerprintAuthAvailable()) {
                 assertEquals(View.VISIBLE, solo.getView(R.id.pin_code_fingerprint_imageview).getVisibility());
                 assertEquals(View.VISIBLE, solo.getView(R.id.pin_code_fingerprint_textview).getVisibility());
@@ -129,8 +128,8 @@ public class PinLockTest extends AbstractTest {
         clickOnView(R.id.pin_code_button_4);
 
         //Check view
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
     }
 
     public void testPinEnablingChanging() {
@@ -138,8 +137,8 @@ public class PinLockTest extends AbstractTest {
 
         //Go to change
         clickOnView(R.id.button_change_pin);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         //Enter previous code
         clickOnView(R.id.pin_code_button_1);
@@ -158,13 +157,13 @@ public class PinLockTest extends AbstractTest {
         clickOnView(R.id.pin_code_button_3);
         clickOnView(R.id.pin_code_button_4);
         clickOnView(R.id.pin_code_button_5);
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
 
         //Go to unlock
         clickOnView(R.id.button_unlock_pin);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         //Enter the code
         clickOnView(R.id.pin_code_button_2);
@@ -173,8 +172,8 @@ public class PinLockTest extends AbstractTest {
         clickOnView(R.id.pin_code_button_5);
 
         //Check view
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
     }
 
     public void testPinLockAfterDefaultTimeout() {
@@ -191,8 +190,8 @@ public class PinLockTest extends AbstractTest {
         solo.getCurrentActivity().finish();
 
         //Check view
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
         solo.sleep(1000);
     }
 
@@ -212,8 +211,8 @@ public class PinLockTest extends AbstractTest {
         solo.getCurrentActivity().finish();
 
         //Check view
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
         solo.sleep(1000);
 
         //Go to NotLockedActivity
@@ -226,8 +225,8 @@ public class PinLockTest extends AbstractTest {
         solo.getCurrentActivity().finish();
 
         //Check view
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
         solo.sleep(1000);
     }
 
@@ -251,8 +250,8 @@ public class PinLockTest extends AbstractTest {
         solo.getCurrentActivity().finish();
 
         //Check view
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
         solo.sleep(1000);
     }
 
@@ -261,11 +260,11 @@ public class PinLockTest extends AbstractTest {
 
         //Go to unlock
         clickOnView(R.id.button_unlock_pin);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         solo.goBack();
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         //reset
         clickOnView(R.id.pin_code_button_1);
@@ -276,11 +275,11 @@ public class PinLockTest extends AbstractTest {
 
         //Go to change
         clickOnView(R.id.button_change_pin);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         solo.goBack();
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
     }
 
     public void testDisablingFingerprintReader() {
@@ -291,8 +290,8 @@ public class PinLockTest extends AbstractTest {
 
         // Go to unlock.
         clickOnView(R.id.button_unlock_pin);
-        solo.waitForActivity(CustomPinActivity.class);
-        solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+        solo.waitForActivity(CustomRxPinActivity.class);
+        solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
 
         // Make sure the fingerprint views are gone.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -305,8 +304,8 @@ public class PinLockTest extends AbstractTest {
         clickOnView(R.id.pin_code_button_2);
         clickOnView(R.id.pin_code_button_3);
         clickOnView(R.id.pin_code_button_4);
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
     }
 
     private void enablePin() {
@@ -321,8 +320,8 @@ public class PinLockTest extends AbstractTest {
         clickOnView(R.id.pin_code_button_2);
         clickOnView(R.id.pin_code_button_3);
         clickOnView(R.id.pin_code_button_4);
-        solo.waitForActivity(MainActivity.class);
-        solo.assertCurrentActivity("MainActivity", MainActivity.class);
+        solo.waitForActivity(MainActivityRx.class);
+        solo.assertCurrentActivity("MainActivityRx", MainActivityRx.class);
     }
 
     private void removePrefsAndGoToEnable() {
@@ -330,10 +329,10 @@ public class PinLockTest extends AbstractTest {
         removeAllPrefs();
 
         //Go to enable
-        if (solo.getCurrentActivity() instanceof MainActivity) {
+        if (solo.getCurrentActivity() instanceof MainActivityRx) {
             clickOnView(R.id.button_enable_pin);
-            solo.waitForActivity(CustomPinActivity.class);
-            solo.assertCurrentActivity("CustomPinActivity", CustomPinActivity.class);
+            solo.waitForActivity(CustomRxPinActivity.class);
+            solo.assertCurrentActivity("CustomRxPinActivity", CustomRxPinActivity.class);
             solo.waitForText("1");
         }
     }

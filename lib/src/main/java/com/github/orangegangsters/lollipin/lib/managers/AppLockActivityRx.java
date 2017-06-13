@@ -13,7 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.orangegangsters.lollipin.lib.PinActivity;
+import com.github.orangegangsters.lollipin.lib.RxPinActivity;
 import com.github.orangegangsters.lollipin.lib.R;
 import com.github.orangegangsters.lollipin.lib.enums.KeyboardButtonEnum;
 import com.github.orangegangsters.lollipin.lib.interfaces.KeyboardButtonClickedListener;
@@ -29,9 +29,9 @@ import java.util.List;
  * Call this activity in normal or singleTop mode (not singleTask or singleInstance, it does not work
  * with {@link android.app.Activity#startActivityForResult(android.content.Intent, int)}).
  */
-public abstract class AppLockActivity extends PinActivity implements KeyboardButtonClickedListener, View.OnClickListener, FingerprintUiHelper.Callback {
+public abstract class AppLockActivityRx extends RxPinActivity implements KeyboardButtonClickedListener, View.OnClickListener, FingerprintUiHelper.Callback {
 
-    public static final String TAG = AppLockActivity.class.getSimpleName();
+    public static final String TAG = AppLockActivityRx.class.getSimpleName();
     public static final String ACTION_CANCEL = TAG + ".actionCancelled";
     private static final int DEFAULT_PIN_LENGTH = 4;
 
@@ -190,7 +190,7 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
      * Gets the {@link String} to be used in the {@link #mStepTextView} based on {@link #mType}
      *
      * @param reason The {@link #mType} to return a {@link String} for
-     * @return The {@link String} for the {@link AppLockActivity}
+     * @return The {@link String} for the {@link AppLockActivityRx}
      */
     public String getStepText(int reason) {
         String msg = null;
@@ -394,7 +394,7 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
                 mPinCode = "";
                 mPinCodeRoundView.refresh(mPinCode.length());
                 Animation animation = AnimationUtils.loadAnimation(
-                        AppLockActivity.this, R.anim.shake);
+                        AppLockActivityRx.this, R.anim.shake);
                 mKeyboardView.startAnimation(animation);
             }
         };
@@ -417,7 +417,7 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
 
 
     /**
-     * Returns the type of this {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * Returns the type of this {@link AppLockActivityRx}
      */
     public int getType() {
         return mType;
@@ -469,16 +469,16 @@ public abstract class AppLockActivity extends PinActivity implements KeyboardBut
      * @return the number of digits in the PIN
      */
     public int getPinLength() {
-        return AppLockActivity.DEFAULT_PIN_LENGTH;
+        return AppLockActivityRx.DEFAULT_PIN_LENGTH;
     }
 
     /**
-     * Get the current class extending {@link AppLockActivity} to re-enable {@link AppLock}
+     * Get the current class extending {@link AppLockActivityRx} to re-enable {@link AppLock}
      * in case it has been collected
      *
-     * @return the current class extending {@link AppLockActivity}
+     * @return the current class extending {@link AppLockActivityRx}
      */
-    public Class<? extends AppLockActivity> getCustomAppLockActivityClass() {
+    public Class<? extends AppLockActivityRx> getCustomAppLockActivityClass() {
         return this.getClass();
     }
 }

@@ -2,6 +2,8 @@ package com.github.orangegangsters.lollipin.lib.managers;
 
 import android.app.Activity;
 
+import com.github.orangegangsters.lollipin.lib.RxPinActivity;
+
 import java.util.HashSet;
 
 public abstract class AppLock {
@@ -32,7 +34,7 @@ public abstract class AppLock {
     public static final int LOGO_ID_NONE = -1;
 
     /**
-     * EXTRA_TYPE, uses to pass to the {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * EXTRA_TYPE, uses to pass to the {@link AppLockActivityRx}
      * to determine in which type it musts be started.
      */
     public static final String EXTRA_TYPE = "type";
@@ -46,9 +48,9 @@ public abstract class AppLock {
 
     /**
      * A {@link java.util.HashSet} of {@link java.lang.String} which are the classes we don't want to
-     * take into account for the {@link com.github.orangegangsters.lollipin.lib.PinActivity}. These activities
+     * take into account for the {@link RxPinActivity}. These activities
      * will not log the last opened time, will not launch the
-     * {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity} etc...
+     * {@link AppLockActivityRx} etc...
      */
     protected HashSet<String> mIgnoredActivities;
 
@@ -83,32 +85,32 @@ public abstract class AppLock {
     public abstract void setTimeout(long timeout);
 
     /**
-     * Get logo resource id used by {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * Get logo resource id used by {@link AppLockActivityRx}
      */
     public abstract int getLogoId();
 
     /**
-     * Set logo resource id used by {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * Set logo resource id used by {@link AppLockActivityRx}
      */
     public abstract void setLogoId(int logoId);
 
     /**
-     * Get the forgot option used by {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * Get the forgot option used by {@link AppLockActivityRx}
      */
     public abstract boolean shouldShowForgot(int appLockType);
 
     /**
-     * Set the forgot option used by {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * Set the forgot option used by {@link AppLockActivityRx}
      */
     public abstract void setShouldShowForgot(boolean showForgot);
 
     /**
-     * Get whether the user backed out of the {@link AppLockActivity} previously
+     * Get whether the user backed out of the {@link AppLockActivityRx} previously
      */
     public abstract boolean pinChallengeCancelled();
 
     /**
-     * Set whether the user backed out of the {@link AppLockActivity}
+     * Set whether the user backed out of the {@link AppLockActivityRx}
      */
     public abstract void setPinChallengeCancelled(boolean cancelled);
 
@@ -194,11 +196,11 @@ public abstract class AppLock {
 
     /**
      * Evaluates if:
-     * - we are already into the {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * - we are already into the {@link AppLockActivityRx}
      * - the passcode is not set
      * - the timeout didn't reached
      * If any of this is true, then we don't need to start the
-     * {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity} (it returns false)
+     * {@link AppLockActivityRx} (it returns false)
      * Otherwise returns true
      */
     public abstract boolean shouldLockSceen(Activity activity);

@@ -1,10 +1,11 @@
 package com.github.orangegangsters.lollipin.lib.interfaces;
 
 import com.github.orangegangsters.lollipin.lib.enums.KeyboardButtonEnum;
+import com.github.orangegangsters.lollipin.lib.managers.AppLockActivityRx;
 
 /**
  * Created by stoyan and oliviergoutay on 1/13/15.
- * The {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity} will implement
+ * The {@link AppLockActivityRx} will implement
  * this in order to receive events from {@link com.github.orangegangsters.lollipin.lib.views.KeyboardButtonView}
  * and {@link com.github.orangegangsters.lollipin.lib.views.KeyboardView}
  */

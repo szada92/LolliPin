@@ -9,7 +9,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.github.orangegangsters.lollipin.MainActivity"
+            android:name="com.github.orangegangsters.lollipin.MainActivityRx"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,7 +22,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.github.orangegangsters.lollipin.CustomPinActivity"
+            android:name="com.github.orangegangsters.lollipin.CustomRxPinActivity"
             android:label="@string/app_name" >
         </activity>
         <activity android:name="com.github.orangegangsters.lollipin.LockedCompatActivity"

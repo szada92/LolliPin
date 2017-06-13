@@ -1,7 +1,6 @@
 package com.github.orangegangsters.lollipin.lib;
 
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +9,8 @@ import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.github.orangegangsters.lollipin.lib.interfaces.LifeCycleInterface;
-import com.github.orangegangsters.lollipin.lib.managers.AppLockActivity;
+import com.github.orangegangsters.lollipin.lib.managers.AppLockActivityRx;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
  * Created by stoyan and olivier on 1/12/15.
@@ -18,11 +18,11 @@ import com.github.orangegangsters.lollipin.lib.managers.AppLockActivity;
  * Then to enable PinCode blocking, you must call
  * {@link com.github.orangegangsters.lollipin.lib.managers.LockManager#enableAppLock(android.content.Context, Class)}
  */
-public class PinActivity extends Activity {
+public class RxPinActivity extends RxAppCompatActivity {
     private static LifeCycleInterface mLifeCycleListener;
     private final BroadcastReceiver mPinCancelledReceiver;
 
-    public PinActivity() {
+    public RxPinActivity() {
         super();
         mPinCancelledReceiver = new BroadcastReceiver() {
             @Override
@@ -35,14 +35,14 @@ public class PinActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IntentFilter filter = new IntentFilter(AppLockActivity.ACTION_CANCEL);
+        IntentFilter filter = new IntentFilter(AppLockActivityRx.ACTION_CANCEL);
         LocalBroadcastManager.getInstance(this).registerReceiver(mPinCancelledReceiver, filter);
     }
 
     @Override
     protected void onResume() {
         if (mLifeCycleListener != null) {
-            mLifeCycleListener.onActivityResumed(PinActivity.this);
+            mLifeCycleListener.onActivityResumed(RxPinActivity.this);
         }
         super.onResume();
     }
@@ -50,7 +50,7 @@ public class PinActivity extends Activity {
     @Override
     protected void onPause() {
         if (mLifeCycleListener != null) {
-            mLifeCycleListener.onActivityPaused(PinActivity.this);
+            mLifeCycleListener.onActivityPaused(RxPinActivity.this);
         }
         super.onPause();
     }

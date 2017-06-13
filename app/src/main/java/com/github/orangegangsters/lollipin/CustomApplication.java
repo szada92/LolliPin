@@ -16,8 +16,8 @@ public class CustomApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        LockManager<CustomPinActivity> lockManager = LockManager.getInstance();
-        lockManager.enableAppLock(this, CustomPinActivity.class);
+        LockManager<CustomRxPinActivity> lockManager = LockManager.getInstance();
+        lockManager.enableAppLock(this, CustomRxPinActivity.class);
         lockManager.getAppLock().setLogoId(R.drawable.security_lock);
     }
 }

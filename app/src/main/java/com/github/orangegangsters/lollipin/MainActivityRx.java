@@ -2,17 +2,16 @@ package com.github.orangegangsters.lollipin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.*;
 import android.view.View;
 import android.widget.Toast;
 
-import com.github.orangegangsters.lollipin.lib.PinActivity;
+import com.github.orangegangsters.lollipin.lib.RxPinActivity;
 import com.github.orangegangsters.lollipin.lib.managers.AppLock;
 
 import lollipin.orangegangsters.github.com.lollipin.R;
 
 
-public class MainActivity extends PinActivity implements View.OnClickListener {
+public class MainActivityRx extends RxPinActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_ENABLE = 11;
 
@@ -30,7 +29,7 @@ public class MainActivity extends PinActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(MainActivity.this, CustomPinActivity.class);
+        Intent intent = new Intent(MainActivityRx.this, CustomRxPinActivity.class);
         switch (v.getId()) {
             case R.id.button_enable_pin:
                 intent.putExtra(AppLock.EXTRA_TYPE, AppLock.ENABLE_PINLOCK);
@@ -45,11 +44,11 @@ public class MainActivity extends PinActivity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.button_compat_locked:
-                Intent intent2 = new Intent(MainActivity.this, LockedCompatActivity.class);
+                Intent intent2 = new Intent(MainActivityRx.this, LockedCompatActivity.class);
                 startActivity(intent2);
                 break;
             case R.id.button_not_locked:
-                Intent intent3 = new Intent(MainActivity.this, NotLockedActivity.class);
+                Intent intent3 = new Intent(MainActivityRx.this, NotLockedActivity.class);
                 startActivity(intent3);
         }
     }

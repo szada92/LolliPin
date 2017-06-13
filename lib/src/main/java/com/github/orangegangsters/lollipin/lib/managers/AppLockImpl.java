@@ -9,7 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
-import com.github.orangegangsters.lollipin.lib.PinActivity;
+import com.github.orangegangsters.lollipin.lib.RxPinActivity;
 import com.github.orangegangsters.lollipin.lib.PinCompatActivity;
 import com.github.orangegangsters.lollipin.lib.PinFragmentActivity;
 import com.github.orangegangsters.lollipin.lib.encryption.Encryptor;
@@ -19,7 +19,7 @@ import com.github.orangegangsters.lollipin.lib.interfaces.LifeCycleInterface;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-public class AppLockImpl<T extends AppLockActivity> extends AppLock implements LifeCycleInterface {
+public class AppLockImpl<T extends AppLockActivityRx> extends AppLock implements LifeCycleInterface {
 
     public static final String TAG = "AppLockImpl";
 
@@ -53,7 +53,7 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
      */
     private static final String ONLY_BACKGROUND_TIMEOUT_PREFERENCE_KEY = "ONLY_BACKGROUND_TIMEOUT_PREFERENCE_KEY";
     /**
-     * The {@link SharedPreferences} key used to store whether the user has backed out of the {@link AppLockActivity}
+     * The {@link SharedPreferences} key used to store whether the user has backed out of the {@link AppLockActivityRx}
      */
     private static final String PIN_CHALLENGE_CANCELLED_PREFERENCE_KEY = "PIN_CHALLENGE_CANCELLED_PREFERENCE_KEY";
     /**
@@ -88,7 +88,7 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
     private SharedPreferences mSharedPreferences;
 
     /**
-     * The activity class that extends {@link com.github.orangegangsters.lollipin.lib.managers.AppLockActivity}
+     * The activity class that extends {@link AppLockActivityRx}
      */
     private Class<T> mActivityClass;
 
@@ -101,10 +101,10 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
      * Static method that allows to get back the current static Instance of {@link AppLockImpl}
      *
      * @param context       The current context of the {@link Activity}
-     * @param activityClass The activity extending {@link AppLockActivity}
+     * @param activityClass The activity extending {@link AppLockActivityRx}
      * @return The instance.
      */
-    public static AppLockImpl getInstance(Context context, Class<? extends AppLockActivity> activityClass) {
+    public static AppLockImpl getInstance(Context context, Class<? extends AppLockActivityRx> activityClass) {
         synchronized (LockManager.class) {
             if (mInstance == null) {
                 mInstance = new AppLockImpl<>(context, activityClass);
@@ -210,21 +210,21 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
 
     @Override
     public void enable() {
-        PinActivity.setListener(this);
+        RxPinActivity.setListener(this);
         PinCompatActivity.setListener(this);
         PinFragmentActivity.setListener(this);
     }
 
     @Override
     public void disable() {
-        PinActivity.clearListeners();
+        RxPinActivity.clearListeners();
         PinCompatActivity.clearListeners();
         PinFragmentActivity.clearListeners();
     }
 
     @Override
     public void disableAndRemoveConfiguration() {
-        PinActivity.clearListeners();
+        RxPinActivity.clearListeners();
         PinCompatActivity.clearListeners();
         PinFragmentActivity.clearListeners();
         mSharedPreferences.edit().remove(PASSWORD_PREFERENCE_KEY)
@@ -344,8 +344,8 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
         }
 
         // already unlock
-        if (activity instanceof AppLockActivity) {
-            AppLockActivity ala = (AppLockActivity) activity;
+        if (activity instanceof AppLockActivityRx) {
+            AppLockActivityRx ala = (AppLockActivityRx) activity;
             if (ala.getType() == AppLock.UNLOCK_PIN) {
                 Log.d(TAG, "already unlock activity");
                 return false;
@@ -380,7 +380,7 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
         String clazzName = activity.getClass().getName();
         Log.d(TAG, "onActivityPaused " + clazzName);
 
-        if ((onlyBackgroundTimeout() || !shouldLockSceen(activity)) && !(activity instanceof AppLockActivity)) {
+        if ((onlyBackgroundTimeout() || !shouldLockSceen(activity)) && !(activity instanceof AppLockActivityRx)) {
             setLastActiveMillis();
         }
     }
@@ -407,7 +407,7 @@ public class AppLockImpl<T extends AppLockActivity> extends AppLock implements L
             return;
         }
 
-        if (!shouldLockSceen(activity) && !(activity instanceof AppLockActivity)) {
+        if (!shouldLockSceen(activity) && !(activity instanceof AppLockActivityRx)) {
             setLastActiveMillis();
         }
     }

@@ -9,7 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.github.orangegangsters.lollipin.lib.interfaces.LifeCycleInterface;
-import com.github.orangegangsters.lollipin.lib.managers.AppLockActivity;
+import com.github.orangegangsters.lollipin.lib.managers.AppLockActivityRx;
 
 /**
  * Created by stoyan and olivier on 1/12/15.
@@ -34,7 +34,7 @@ public class PinFragmentActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IntentFilter filter = new IntentFilter(AppLockActivity.ACTION_CANCEL);
+        IntentFilter filter = new IntentFilter(AppLockActivityRx.ACTION_CANCEL);
         LocalBroadcastManager.getInstance(this).registerReceiver(mPinCancelledReceiver, filter);
     }
 

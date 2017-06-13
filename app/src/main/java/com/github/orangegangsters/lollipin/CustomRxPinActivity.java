@@ -6,7 +6,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.widget.Toast;
 
-import com.github.orangegangsters.lollipin.lib.managers.AppLockActivity;
+import com.github.orangegangsters.lollipin.lib.managers.AppLockActivityRx;
 
 import lollipin.orangegangsters.github.com.lollipin.R;
 import uk.me.lewisdeane.ldialogs.BaseDialog;
@@ -15,7 +15,7 @@ import uk.me.lewisdeane.ldialogs.CustomDialog;
 /**
  * Created by oliviergoutay on 1/14/15.
  */
-public class CustomPinActivity extends AppLockActivity {
+public class CustomRxPinActivity extends AppLockActivityRx {
 
     @Override
     public void showForgotDialog() {

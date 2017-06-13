@@ -9,7 +9,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.github.orangegangsters.lollipin.lib.interfaces.LifeCycleInterface;
-import com.github.orangegangsters.lollipin.lib.managers.AppLockActivity;
+import com.github.orangegangsters.lollipin.lib.managers.AppLockActivityRx;
 
 /**
  * Created by callmepeanut on 16-1-14.
@@ -34,7 +34,7 @@ public class PinCompatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IntentFilter filter = new IntentFilter(AppLockActivity.ACTION_CANCEL);
+        IntentFilter filter = new IntentFilter(AppLockActivityRx.ACTION_CANCEL);
         LocalBroadcastManager.getInstance(this).registerReceiver(mPinCancelledReceiver, filter);
     }
 

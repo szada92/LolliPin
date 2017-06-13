@@ -2,7 +2,7 @@ package com.github.orangegangsters.lollipin.lib.managers;
 
 import android.content.Context;
 
-import com.github.orangegangsters.lollipin.lib.PinActivity;
+import com.github.orangegangsters.lollipin.lib.RxPinActivity;
 import com.github.orangegangsters.lollipin.lib.PinCompatActivity;
 import com.github.orangegangsters.lollipin.lib.PinFragmentActivity;
 
@@ -11,7 +11,7 @@ import com.github.orangegangsters.lollipin.lib.PinFragmentActivity;
  * the actual app calling the library.
  * You must get this static instance by calling {@link #getInstance()}
  */
-public class LockManager<T extends AppLockActivity> {
+public class LockManager<T extends AppLockActivityRx> {
 
     /**
      * The static singleton instance
@@ -36,7 +36,7 @@ public class LockManager<T extends AppLockActivity> {
 
     /**
      * You must call that into your custom {@link android.app.Application} to enable the
-     * {@link com.github.orangegangsters.lollipin.lib.PinActivity}
+     * {@link RxPinActivity}
      */
     public void enableAppLock(Context context, Class<T> activityClass) {
         if (mAppLocker != null) {
@@ -50,7 +50,7 @@ public class LockManager<T extends AppLockActivity> {
      * Tells the app if the {@link com.github.orangegangsters.lollipin.lib.managers.AppLock} is enabled or not
      */
     public boolean isAppLockEnabled() {
-        return (mAppLocker != null && (PinActivity.hasListeners() ||
+        return (mAppLocker != null && (RxPinActivity.hasListeners() ||
                 PinFragmentActivity.hasListeners() || PinCompatActivity.hasListeners()));
     }
 
